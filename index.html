@@ -1,309 +1,237 @@
-<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Love u</title>
-    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --color-env: #FFB7C5;
-            --color-env2: #ff9aad;
-            --color-flap: #ff8da1;
-            --color-bg: #FDBBF6;
-            --color-heart: #ff85a2;
-            --color-sparkle: #fff;
-            --wax-red: #c04040;
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Our Story</title>
+
+    <link type="text/css" rel="stylesheet" href="./index_files/default.css">
+    <script type="text/javascript" src="./index_files/jquery.min.js"></script>
+    <script type="text/javascript" src="./index_files/jscex.min.js"></script>
+    <script type="text/javascript" src="./index_files/jscex-parser.js"></script>
+    <script type="text/javascript" src="./index_files/jscex-jit.js"></script>
+    <script type="text/javascript" src="./index_files/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="./index_files/jscex-async.min.js"></script>
+    <script type="text/javascript" src="./index_files/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="./index_files/functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./index_files/love.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./config.js"></script>
+    <style type="text/css">
+        <!--
+        .STYLE1 {
+            color: #666666
         }
 
-        #envelope {
-            position: relative;
-            width: 280px;
-            height: 180px;
-            border-bottom-left-radius: 6px;
-            border-bottom-right-radius: 6px;
-            margin: 0 auto;
-            top: 150px;
-            background-color: var(--color-flap);
-            box-shadow: 0 4px 20px rgba(0,0,0,.1);
-            cursor: pointer;
-        }
-
-        .front {
-            position: absolute;
-            width: 0;
-            height: 0;
-            z-index: 3;
-        }
-
-        .flap {
-            border-left: 140px solid transparent;
-            border-right: 140px solid transparent;
-            border-bottom: 82px solid transparent;
-            border-top: 98px solid var(--color-flap);
-            transform-origin: top;
-            pointer-events: none;
-        }
-
-        .pocket {
-            border-left: 140px solid var(--color-env);
-            border-right: 140px solid var(--color-env);
-            border-bottom: 90px solid var(--color-env2);
-            border-top: 90px solid transparent;
-            border-bottom-left-radius: 6px;
-            border-bottom-right-radius: 6px;
-        }
-
-        .letter {
-            position: relative;
-            background-color: #e0d9dd;
-            width: 90%;
-            margin: 0 auto;
-            height: 90%;
-            top: 5%;
-            border-radius: 6px;
-            box-shadow: 0 2px 26px rgba(0,0,0,.08);
-            padding: 15px;
-            box-sizing: border-box;
-        }
-
-        .letter:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-image: linear-gradient(180deg, 
-                rgba(255,255,255,0.00) 25%, 
-                rgba(255,231,236,0.70) 55%, 
-                rgba(255,231,236,1.00) 100%);
-        }
-
-        .message {
-            position: relative;
-            z-index: 2;
-            font-family: 'Handlee', cursive;
-            color: #d46a84;
-            text-align: center;
-            line-height: 1;
-            padding-top: 0px;
-        }
-
-        .message p {
-            margin: 10px 0;
-            font-size: 1.8em;
-            text-shadow: 0 2px 3px rgba(0,0,0,0.1);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .envlope-wrapper {
-            height: 380px;
-            margin-top: 50px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .open .flap {
-            transform: rotateX(180deg);
-            transition: transform 0.4s ease, z-index 0.6s;
-            z-index: 1;
-        }
-
-        .close .flap {
-            transform: rotateX(0deg);
-            transition: transform 0.4s 0.6s ease, z-index 1s;
-            z-index: 5;
-        }
-
-        .close .letter {
-            transform: translateY(0px); 
-            transition: transform 0.4s ease, z-index 1s;
-            z-index: 1;
-        }
-
-        .open .letter {
-            transform: translateY(-60px) rotate(-2deg);
-            transition: transform 0.4s 0.6s ease, z-index 0.6s;
-            z-index: 2;
-        }
-
-        
-
-        .letter-corner {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffd1dc;
-            border-radius: 5px;
-            z-index: 3;
-        }
-        .corner-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-        .corner-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
-
-        .hearts, .sparkles {
-            position: absolute;
-            top: 90px;
-            left: 0;
-            right: 0;
-            z-index: 2;
-        }
-
-        .heart, .sparkle {
-            position: absolute;
-            bottom: 0;
-            pointer-events: none;
-        }
-
-        .heart:before,
-        .heart:after {
-            content: "";
-            position: absolute;
-            left: 25px;
-            top: 0;
-            width: 25px;
-            height: 40px;
-            background: var(--color-heart);
-            border-radius: 25px 25px 0 0;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-
-        .heart:after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        .sparkle {
-            width: 8px;
-            height: 8px;
-            background: var(--color-sparkle);
-            border-radius: 50%;
-            animation: sparkleTwinkle 1s infinite;
-        }
-
-        .close .heart,
-        .close .sparkle {
-            opacity: 0;
-            animation: none;
-        }
-
-        .a1 { left: 20%; transform: scale(0.6); animation: slideUp 4s linear infinite, sideSway 2s ease-in-out infinite alternate; }
-        .a2 { left: 55%; animation: slideUp 5s linear infinite, sideSway 4s ease-in-out infinite alternate; }
-        .a3 { left: 10%; transform: scale(0.8); animation: slideUp 7s linear infinite, sideSway 2s ease-in-out infinite alternate; }
-
-        .s1 { left: 30%; animation: sparkleUp 3s linear infinite; }
-        .s2 { left: 60%; animation: sparkleUp 4s linear infinite; }
-        .s3 { left: 45%; animation: sparkleUp 5s linear infinite; }
-
-        @keyframes slideUp {
-            0% { top: 0; }
-            100% { top: -600px; }
-        }
-
-        @keyframes sideSway {
-            0% { margin-left: 0; }
-            50% { margin-left: 50px; }
-            100% { margin-left: 0; }
-        }
-
-        @keyframes sparkleUp {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-500px) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes sparkleTwinkle {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.5); }
-        }
-
-        body {
-            background-color: var(--color-bg);
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .reset {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .reset button {
-            font-weight: 600;
-            transition: all 0.3s ease;
-            background-color: var(--color-env);
-            border: 2px solid var(--color-env2);
-            border-radius: 20px;
-            color: white;
-            padding: 12px 25px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            font-family: Arial, sans-serif;
-        }
-
-        .reset button:hover {
-            background-color: var(--color-env2);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 7px 25px rgba(0,0,0,0.2);
-        }
+        -->
     </style>
 </head>
 <body>
-    <div class="envlope-wrapper">
-        <div id="envelope" class="close">
-            <div class="wax-seal"></div>
-            <div class="front flap"></div>
-            <div class="front pocket"></div>
-            <div class="letter">
-                <div class="letter-corner corner-tl"></div>
-                <div class="letter-corner corner-br"></div>
-                <div class="message">
-                    <p>Happy Birthday</p>
-                    <p>mwah.</p>
-                </div>
-            </div>
-            <div class="hearts">
-                <div class="heart a1"></div>
-                <div class="heart a2"></div>
-                <div class="heart a3"></div>
-            </div>
-            <div class="sparkles">
-                <div class="sparkle s1"></div>
-                <div class="sparkle s2"></div>
-                <div class="sparkle s3"></div>
+
+<img src="https://ajlovechina.github.io/loveBalloon/static/music.png" style="position: fixed;z-index: 10001;top:10px;right:10px;" onclick="let m = document.querySelector('.song-audio-autoplay'); if (m.paused ) {m.play(); this.className = 'rotateImages'} else {m.pause(); this.className = ''}">
+<audio class="song-audio-autoplay" controls loop style="display: none;visibility: hidden">
+    <source src="./index_files/music.mp3" type="audio/mp3"/>
+</audio>
+<style type="text/css">
+    .rotateImages{
+        -webkit-animation:myRotate 10s linear infinite;
+        animation:myRotate 10s linear infinite;
+    }
+    @-webkit-keyframes myRotate{
+        0%{ -webkit-transform: rotate(0deg);}
+        50%{ -webkit-transform: rotate(180deg);}
+        100%{ -webkit-transform: rotate(360deg);}
+    }
+    @keyframes myRotate{
+        0%{ -webkit-transform: rotate(0deg);}
+        50%{ -webkit-transform: rotate(180deg);}
+        100%{ -webkit-transform: rotate(360deg);}
+    }
+</style>
+
+<div id="main">
+    <div id="error">本页面采用HTML5编辑，目前您的浏览器无法显示，请换成谷歌(<a
+            href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a
+            href="http://firefox.com.cn/download/">Firefox</a>)浏览器，或者其他游览器的最新版本。
+    </div>
+    <div id="wrap">
+        <div id="text">
+            <div id="code">
             </div>
         </div>
+        <div id="clock-box">
+                    <span id="clock-box-inside-text">
+					</span>
+            <div id="clock"></div>
+        </div>
+        <canvas id="canvas" width="1100" height="680"></canvas>
     </div>
-    <div class="reset">
-        <button id="open">Open Envelope</button>
-        <button id="reset">Close Envelope</button>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            const envelope = $('#envelope');
-            const btnOpen = $("#open");
-            const btnReset = $("#reset");
+</div>
 
-            envelope.on('click', open);
-            btnOpen.on('click', open);
-            btnReset.on('click', close);
+<script type="text/javascript">
+    $('#code').html(config.lines.map(item => {
+        return `<span class="say">${item}</span><br>
+						<span class="say"> </span><br>`
+    }).reduce((a, b) => {
+        return a + b;
+    }))
+    $("#clock-box-inside-text").html(`${config.names[0]}<span class="STYLE1">与</span> ${config.names[1]}<span class="STYLE1">已经相恋了</span>`)
+</script>
 
-            function open() {
-                envelope.removeClass("close").addClass("open");
+<script>
+    (function () {
+        var canvas = $('#canvas');
+
+        if (!canvas[0].getContext) {
+            $("#error").show();
+            return false;
+        }
+
+        var width = canvas.width();
+        var height = canvas.height();
+
+        canvas.attr("width", width);
+        canvas.attr("height", height);
+
+        var opts = {
+            seed: {
+                x: width / 2 - 20,
+                color: "rgb(190, 26, 37)",
+                scale: 2
+            },
+            branch: [
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
+                    ]],
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    ]],
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    ]],
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    ]]
+                ]]
+            ],
+            bloom: {
+                num: 700,
+                width: 1080,
+                height: 650,
+            },
+            footer: {
+                width: 1200,
+                height: 5,
+                speed: 10,
             }
+        }
 
-            function close() {
-                envelope.removeClass("open").addClass("close");
+        var tree = new Tree(canvas[0], width, height, opts);
+        var seed = tree.seed;
+        var foot = tree.footer;
+        var hold = 1;
+
+        canvas.click(function (e) {
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            if (seed.hover(x, y)) {
+                hold = 0;
+                canvas.unbind("click");
+                canvas.unbind("mousemove");
+                canvas.removeClass('hand');
             }
+        }).mousemove(function (e) {
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            canvas.toggleClass('hand', seed.hover(x, y));
         });
-    </script>
+
+        var seedAnimate = eval(Jscex.compile("async", function () {
+            seed.draw();
+            while (hold) {
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canScale()) {
+                seed.scale(0.95);
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canMove()) {
+                seed.move(0, 2);
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+        }));
+
+        var growAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.grow();
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canGrow());
+        }));
+
+        var flowAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.flower(2);
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canFlower());
+        }));
+
+        var moveAnimate = eval(Jscex.compile("async", function () {
+            tree.snapshot("p1", 240, 0, 610, 680);
+            while (tree.move("p1", 500, 0)) {
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+            foot.draw();
+            tree.snapshot("p2", 500, 0, 610, 680);
+
+            // 会有闪烁不得意这样做, (＞﹏＜)
+            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+            canvas.css("background", "#ffe");
+            $await(Jscex.Async.sleep(300));
+            canvas.css("background", "none");
+        }));
+
+        var jumpAnimate = eval(Jscex.compile("async", function () {
+            var ctx = tree.ctx;
+            while (true) {
+                tree.ctx.clearRect(0, 0, width, height);
+                tree.jump();
+                foot.draw();
+                $await(Jscex.Async.sleep(25));
+            }
+        }));
+
+        var textAnimate = eval(Jscex.compile("async", function () {
+            var together = new Date(config.date);
+
+            $("#code").show().typewriter();
+            $("#clock-box").fadeIn(500);
+            while (true) {
+                timeElapse(together);
+                $await(Jscex.Async.sleep(1000));
+            }
+        }));
+
+        var runAsync = eval(Jscex.compile("async", function () {
+            $await(seedAnimate());
+            $await(growAnimate());
+            $await(flowAnimate());
+            $await(moveAnimate());
+
+            textAnimate().start();
+
+            $await(jumpAnimate());
+        }));
+
+        runAsync().start();
+    })();
+</script>
+
+
 </body>
 </html>
