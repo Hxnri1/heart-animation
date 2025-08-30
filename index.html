@@ -27,10 +27,18 @@
 </audio>
 
 <script>
-    // Audio starten und unmuted
+    // Auto-start Audio mit Entmuten, funktioniert auch wenn Browser Autoplay blockiert
     window.addEventListener('load', function(){
         var audio = document.getElementById('love-music');
-        audio.play().then(()=>{ audio.muted = false; }).catch(()=>{ console.log("Autoplay blockiert, bitte klicken"); });
+        audio.play().then(() => {
+            audio.muted = false; // Entmuten nach Start
+        }).catch(() => {
+            // Wenn Autoplay blockiert: Musik nach erstem Klick starten
+            document.body.addEventListener('click', function(){
+                audio.play();
+                audio.muted = false;
+            }, { once: true });
+        });
     });
 </script>
 
